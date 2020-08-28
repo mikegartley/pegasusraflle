@@ -1,0 +1,20 @@
+﻿@{
+    Layout = "/Shared/_SiteLayout.cshtml";
+
+
+    var UserID = (string)Session["userID"];
+
+    if(!string.IsNullOrEmpty(UserID))
+    {
+        Page.UserID = UserID;
+    }
+
+
+    if (Request["logout"] == "t")
+    {
+        Session.Abandon();
+        Session.Clear();
+
+        Response.Redirect("/", true);
+    }
+}

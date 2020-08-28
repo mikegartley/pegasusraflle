@@ -1,0 +1,47 @@
+{
+  "name": "reports.ui",
+  "version": "1.4.0",
+  "private": true,
+  "description": "MoneyShow Reports",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "styles": "node-sass --output-style compressed -o ../project.web/css scss/style.scss",
+    "blue": "node-sass --output-style compressed -o ../project.web/css/colors scss/colors/blue.scss",
+    "autoprefixer": "postcss -u autoprefixer -r ../project.web/css/*",
+    "lint": "eslint --fix scripts",
+    "scripts": "uglifyjs scripts/*.js -m -o ../project.web/js/main.js && uglifyjs scripts/*.js -m -c -o ../project.web/js/main.min.js",
+    "imagemin": "imagemin img/**/*  -v --out-dir ../project.web/img",
+    "server": "browser-sync start --server ../project.web --files '../project.web/css/*.css, ../project.web/js/*.js'",
+    "build:css": "npm run styles && npm run blue && npm run autoprefixer",
+    "build:js": "npm run lint && npm run scripts",
+    "build": "npm run build:js && npm run build:css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://MikeGartley@bitbucket.org/moneyshowdevs/show-sites.git"
+  },
+  "author": "Mike Gartley",
+  "license": "ISC",
+  "dependencies": {
+    "normalize.sass": "3.0.3",
+    "npm": "6.13.3"
+  },
+  "devDependencies": {
+    "autoprefixer": "9.7.3",
+    "browser-sync": "2.26.7",
+    "eslint": "6.7.2",
+    "eslint-config-google": "0.14.0",
+    "font-awesome": "4.7.0",
+    "imagemin": "7.0.1",
+    "imagemin-jpegtran": "6.0.0",
+    "imagemin-pngquant": "8.0.0",
+    "imagemin-svgo": "7.0.0",
+    "node-sass": "4.13.0",
+    "onchange": "6.1.0",
+    "postcss-cli": "6.1.3",
+    "svg-sprite-generator": "0.0.7",
+    "svgo": "1.3.2",
+    "uglify-js": "3.7.2"
+  }
+}

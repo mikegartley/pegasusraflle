@@ -1,0 +1,144 @@
+﻿@using project.data;
+@{
+    Layout = "";
+    string showId = App.showid;
+    var errorMessage = "";
+    var ThankYou = "";
+    bool forgotPassword = false;
+    HttpCookie cookie = Request.Cookies["virtualUser"];
+    var display = "";
+    var displayForgotPassword = "";
+    var recoveryemail = "";
+
+    if (IsPost) // Form Post
+    {
+        var btnLogin = System.Web.HttpUtility.UrlDecode(Request.Form["btnLogin"]);
+
+        Validation.Add("userName",
+            Validator.Required("User Name is required."));
+
+        Validation.Add("password",
+            Validator.Required("Password is required. Duh!"));
+
+        string userName = System.Web.HttpUtility.UrlDecode(Request.Form["userName"]);
+        string password = System.Web.HttpUtility.UrlDecode(Request.Form["password"]);
+        string rememberMe = System.Web.HttpUtility.UrlDecode(Request.Form["rememberMe"]);
+
+        if ((Validation.IsValid())) // Checks validation
+        {
+            if (userName == "BatWoman" && password == "IamPegasus")
+            {
+                Page.UserID = "BatWoman";
+                Session["userID"] = "BatWoman";
+                Response.Redirect("~/", true);
+            }
+        }
+    }
+
+}
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="~/img/favicon.png">
+    <title>Pegasus Raffle Login Page</title>
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link href="/css/icons/fontawesome-pro/css/all.min.css?v=54" rel="stylesheet">
+    <link href="~/css/style.css?v=@DateTime.Now" rel="stylesheet">
+    <link href="~/css/animate.css" rel="stylesheet">
+    <link href="~/css/spinners.css" rel="stylesheet">
+
+    <!-- You can change the theme colors from here -->
+    <link href="~/css/colors/blue.css?v=@DateTime.Now" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="fix-header card-no-border">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MZPWC5S"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <section id="wrapper" class="relative">
+        <div class="login-register" style="background-image:url(/img/background/login-register.jpg?v=20); background-size: cover; height: 100vh;">
+            <div class="login-box card shadow">
+                <div class="card-body">
+                    @if (forgotPassword)
+                    {
+                        display = "display: none;";
+                        displayForgotPassword = "display: block";
+                    }
+                    <form class="form-horizontal form-material" id="loginform" method="post" style="@display">
+                        <div class="text-center m-b-20 ">
+                            <h1 class="box-title text-uppercase font-bold font-poppins">
+                                Pegasus Raffle
+                            </h1>
+                            @if (!string.IsNullOrEmpty(errorMessage))
+                            {
+                                <div class="alert alert-danger"><p class="text-danger font-poppins">@Html.Raw(errorMessage)</p></div>
+                            }
+                        </div>
+
+                        <div class="form-group ">
+                            <div class="col-xs-12">
+                                @Html.Label("User Name", "userName")
+
+                                @Html.TextBox("userName", "", new { @class = "form-control", @aria_label="Username Text Box" })
+                                @Html.ValidationMessage("userName")
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                @Html.Label("Password", "password")
+
+                                @Html.Password("password", "", new { @class = "form-control", @aria_label = "Password Box" })
+                                @Html.ValidationMessage("password")
+                            </div>
+                        </div>
+
+                        <div class="form-group text-center m-t-20">
+                            <div class="col-xs-12">
+                                <input type="submit" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" name="btnLogin" aria-label="Login to Admin button" value="Login" />
+                            </div>
+                        </div>
+                    </form>
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="~/js/jquery-3.5.1.min.js"></script>
+
+    <!--Custom JavaScript -->
+    <script src="~/js/custom.min.js?v=@DateTime.Now"></script>
+    <!--Menu sidebar -->
+    <script src="~/js/sidebarmenu.js?v=11"></script>
+    <!-- bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-slimScroll/1.3.8/jquery.slimscroll.min.js"></script>
+    <!--stickey kit -->
+    <script src="~/js/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+</body>
+</html>

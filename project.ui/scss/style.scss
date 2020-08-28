@@ -1,0 +1,36 @@
+/*
+Template Name: Admin Press Admin
+Author: Themedesigner
+Email: niravjoshi87@gmail.com
+File: scss
+*/
+/**
+ * Table Of Content
+ *
+ * 	1. Globals
+ *	2. Headers
+ *	3. Navigations
+ *	4. Banners
+ *	5. Footers
+ *	6. app
+ *	7. Widgets
+ *	8. Custom Templates
+ */
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100&display=swap');
+
+@import 'variable'; 
+@import 'app';
+@import 'pages';
+@import 'sidebar';
+
+@import 'widgets';
+@import 'grid';
+@import 'responsive'; 
+@import 'material';
+@import 'flip';
+@import 'override';
+@import 'confetti'; 
+
+

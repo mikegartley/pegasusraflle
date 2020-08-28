@@ -1,0 +1,202 @@
+﻿@using project.data;
+
+
+@{
+    Page.Title = "Entry Admin";
+    //Layout = "Your Layout Page goes here";
+
+    var Raffle_Entries_LoadAll = Prizes.Raffle_Entries_LoadAll();
+    int PrizeID = 0;
+    if (IsPost)
+    {
+        var btnAddPrize = System.Web.HttpUtility.UrlDecode(Request.Form["btnAddPrize"]);
+        var btnAddEntry = System.Web.HttpUtility.UrlDecode(Request.Form["btnAddEntry"]);
+        if (btnAddEntry != null)
+        {
+            string Email = System.Web.HttpUtility.UrlDecode(Request.Form["entryEmail"]);
+            int NumberofEntries = System.Web.HttpUtility.UrlDecode(Request.Form["NumberofEntries"]).AsInt();
+
+            bool EntriesAdd = Prizes.Raffle_Entries_Add(Email, NumberofEntries);
+
+            if (EntriesAdd)
+            {
+                Raffle_Entries_LoadAll = Prizes.Raffle_Entries_LoadAll();
+            }
+        }
+        else if (btnAddPrize != null)
+        {
+            string PrizeName = System.Web.HttpUtility.UrlDecode(Request.Form["prizeTitle"]);
+            string PrizeDescription = System.Web.HttpUtility.UrlDecode(Request.Form["PrizeDescription"]);
+
+            bool EntriesAdd = Prizes.Raffle_Prize_Add(PrizeName, PrizeDescription);
+
+            if (EntriesAdd)
+            {
+                Raffle_Entries_LoadAll = Prizes.Raffle_Entries_LoadAll();
+            }
+        }
+        else
+        {
+            int EntryID = System.Web.HttpUtility.UrlDecode(Request.Form["EntryID"]).AsInt();
+            bool EntriesDel = Prizes.Raffle_Entries_Delete(EntryID);
+            if (EntriesDel)
+            {
+                Raffle_Entries_LoadAll = Prizes.Raffle_Entries_LoadAll();
+            }
+
+        }
+    }
+}
+@section subHero{
+    <div class="row page-titles">
+        <div class="col-md-12">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Prize Listing</a></li>
+
+                <li class="breadcrumb-item active">@Page.Title</li>
+            </ol>
+        </div>
+    </div>
+}
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card no-border shadow">
+            <div class="card-header text-white">
+                <div class="row ">
+                    <div class="col align-self-center">
+                        <h4 class="mb-0">Entries</h4>
+                    </div>
+                    <div class="col text-right">
+                        <div class="btn-group btn-sm">
+                            <button class="btn btn-sm btn-success" data-toggle="modal" data-title="Create Entry" data-target="#createEntry">Create Entry</button>
+                            <button class="btn btn-sm btn-primary" data-toggle="modal" data-title="Creat Prize" data-target="#addPrize">Create Prize</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-body table-responsive">
+                <table id="DataTable" class="table table-border table-striped table-sm font-14" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Email</th>
+                            <th class="text-right">Ticket Number</th>
+                            <th class="text-right">Date Created</th>
+                            <th scope="row" class="text-center">Winner Winner</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var data in Raffle_Entries_LoadAll)
+                        {
+                            <tr>
+                                <td class="align-middle">
+                                    <form method="post">
+                                        @Html.Hidden("entryID", data.Entry_ID)
+                                        <button class="btn btn-link p-0" aria-label="Delete @data.Entry_ID for @data.Entry_EmailAddress">
+                                            <i class="fal fa-trash-alt mr-3 text-danger" aria-label="Delete @data.Entry_ID for @data.Entry_EmailAddress"></i>
+
+                                        </button>
+                                        @data.Entry_EmailAddress
+                                    </form>
+                                </td>
+                                <td class="align-middle text-right">@data.Entry_TicketNumber</td>
+                                <td class="align-middle text-right">@data.Entry_DateTime</td>
+                                <td class="text-center">
+                                    @if (data.Entry_WonPrize > 0)
+                                    {
+                                        <i class="fal fa-trophy-alt fa-2x text-success"  role="img"  aria-hidden="true" data-toggle="tooltip" title="Winner"></i>
+                                        <span class="sr-only">@data.Prize_Name Winner</span>
+                                    }
+                                    else
+                                    {
+                                        <i class="fal fa-sad-tear fa-2x text-danger" role="img" aria-hidden="true" data-toggle="tooltip" title="No Winner"></i>
+                                        <span class="sr-only">Loser</span>
+
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="createEntry" class="modal fade close-modal" tabindex="-1" role="dialog" aria-labelledby="vcenter" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-light-success">
+                <h4 class="modal-title" id="vcenter">Add New Entry</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <form method="post" enctype="multipart/form-data">
+                    <div class="row ">
+                        <div class="col-xlg-7 col-lg-7 col-7 form-group">
+                            @Html.Label("Entry Email")
+                            @Html.TextBox("entryEmail", "", new { @class = "form-control " })
+                            @Html.ValidationMessage("entryEmail")
+                        </div>
+                        <div class="col-xlg-7 col-lg-7 col-7 form-group">
+                            @Html.Label("Number of Entries")
+                            @Html.TextBox("NumberofEntries", "", new { @class = "form-control " })
+                            @Html.ValidationMessage("NumberofEntries")
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-6 text-center">
+                            <input name="btnAddEntry" class="btn btn-block btn-outline-success text-uppercase" type="submit" value="Create Entry" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div id="addPrize" class="modal fade close-modal" tabindex="-1" role="dialog" aria-labelledby="vcenter" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-light-success">
+                <h4 class="modal-title" id="vcenter">Add New Prize</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <form method="post" enctype="multipart/form-data">
+                    <div class="row ">
+                        <div class="col-xlg-7 col-lg-7 col-7 form-group">
+                            @Html.Label("Prize Title")
+                            @Html.TextBox("prizeTitle", "", new { @class = "form-control " })
+                            @Html.ValidationMessage("prizeTitle")
+                        </div>
+                    </div>
+
+                    <div class="form-row ">
+                        <div class="col-12 form-group">
+                            @Html.Label("Prize Description")
+                            @Html.TextBox("prizeDescription", "", new { @class = "form-control " })
+                            @Html.ValidationMessage("prizeDescription")
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-6 text-center">
+                            <input name="btnAddPrize" class="btn btn-block btn-outline-success text-uppercase" type="submit" value="Create Prize" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        $("#DataTable").DataTable({
+            "pageLength": 50,
+            "responsive": true,
+        });
+    </script>
+}

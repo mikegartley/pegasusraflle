@@ -1,0 +1,42 @@
+﻿table.dataTable > tbody > tr.child ul.dtr-details{
+    width:100% !important;
+}
+
+.nav-pills .nav-link.active {
+    background-color: $warning !important;
+    color: $white !important;
+}
+
+strong{
+    font-weight: bold !important;
+}
+.profile-tab {
+    .nav-tabs {
+        background-color: $themecolor !important;
+        border-left: 2px solid #ffffff;
+
+        a {
+            color: #fff !important;
+        }
+    }
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+
+
+.nav-tabs {
+    background-color: $orange !important;
+    border-left: 2px solid #ffffff;
+
+    a {
+        color: $themecolor !important;
+    }
+}
+.nav-tabs .nav-link.active {
+    background-color: $warning !important;
+    color: $white !important;
+    border-radius:0;
+}

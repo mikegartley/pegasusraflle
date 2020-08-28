@@ -1,0 +1,34 @@
+﻿/* Flip Cards CSS */
+.card-container {
+    display: grid;
+}
+
+.card-flip {
+    display: grid;
+    grid-template: 1fr / 1fr;
+    grid-template-areas: "frontAndBack";
+    transform-style: preserve-3d;
+    transition: all 2s ease;
+}
+
+.card-flip div {
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+}
+
+.front {
+    grid-area: frontAndBack;
+}
+
+.back {
+    grid-area: frontAndBack;
+    transform: rotateY(-180deg);
+    transition-delay: .25s;
+}
+
+.card-container:hover .card-flip {
+    transform: rotateY(180deg);
+    transition-delay: .5s;
+}
+
+

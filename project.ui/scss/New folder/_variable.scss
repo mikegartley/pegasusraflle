@@ -1,0 +1,122 @@
+/*
+Template Name: Admin Press Admin
+Author: Themedesigner
+Email: niravjoshi87@gmail.com
+File: scss
+*/
+// Variables
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700');
+
+$bodyfont:'Poppins', sans-serif;
+$headingfont:'Poppins', sans-serif;
+
+/*Theme Colors*/
+
+$topbar: #1976d2;
+$sidebar: #fff;
+$sidebar-white: #e5edef;
+$sidebar-alt: #f2f6f8;
+$bodycolor: #eef5f9;
+$headingtext: #455a64;
+$bodytext: #67757c;
+$sidebar-text: #607d8b;
+$sidebar-icons: #99abb4;
+
+$light-text: #a6b7bf;
+$themecolor: #1976d2;
+$themecolor-alt: #26c6da;
+$themecolor-dark: #028ee1;
+
+
+
+
+$sidebar: $themecolor;
+$sidebar-white: #e5edef;
+$sidebar-alt:#f2f6f8;
+$bodycolor: #eef5f9;
+$headingtext: #455a64;
+$bodytext: #67757c; 
+$sidebar-text: #607d8b;
+$sidebar-icons: #99abb4;
+
+/*bootstrap Color*/
+$danger: #891C10;
+$success: #60A561;
+$warning: #F8991D; //#F58149;
+$primary: $themecolor;
+$info: #4b77a1;
+$inverse: #508484;
+$muted: #99abb4;
+$dark: #4C5760;
+$light: #FDFFFC;
+$extra-light: #ebf3f5;
+$bglight: rgba(0, 0, 0, 0.02);
+
+/*Light colors*/
+$light-danger: lighten($danger, 20%);
+$light-success: lighten($success, 20%);
+$light-warning: lighten($warning, 20%);
+$light-primary: lighten($primary, 20%);
+$light-info: lighten($info, 20%);
+$light-inverse: lighten($inverse, 20%);
+$light-megna: #e0f2f4;
+
+$danger-dark: darken($danger ,10%);
+$success-dark: darken($success,10%);
+$warning-dark: darken($warning,10%); 
+$primary-dark: darken($primary,10%); 
+$info-dark: darken($info,10%); 
+$red-dark:  #d61f1f;
+$inverse-dark: darken($inverse,10%); 
+$dark-transparent:rgba(0, 0, 0, 0.05);
+
+$info-shadow: 0 2px 2px 0 rgba(66,165,245,.14), 0 3px 1px -2px rgba(66,165,245,.2), 0 1px 5px 0 rgba(66,165,245,.12);
+$info-shadow-hover:0 14px 26px -12px rgba(23,105,255,.42), 0 4px 23px 0 rgba(0,0,0,.12), 0 8px 10px -5px rgba(23,105,255,.2);
+
+$warning-shadow: 0 2px 2px 0 rgba(245,129,73,.14), 0 3px 1px -2px rgba(245,129,73,.2), 0 1px 5px 0 rgba(245,129,73,.12);
+$warning-shadow-hover: 0 14px 26px -12px rgba(245,129,73,.42), 0 4px 23px 0 rgba(0,0,0,.12), 0 8px 10px -5px rgba(245,129,73,.2);
+
+$danger-shadow: 0 2px 2px 0 rgba(187,50,31,.14), 0 3px 1px -2px rgba(187,50,31,.2), 0 1px 5px 0 rgba(187,50,31,.12);
+$danger-shadow-hover: 0 14px 26px -12px rgba(187,50,31,.42), 0 4px 23px 0 rgba(0,0,0,.12), 0 8px 10px -5px rgba(187,50,31,.2);
+
+$success-shadow: 0 2px 2px 0 rgba(96,165,97,.14), 0 3px 1px -2px rgba(40,190,189,.2), 0 1px 5px 0 rgba(96,165,97,.12);
+$success-shadow-hover: 0 14px 26px -12px rgba(96,165,97,.42), 0 4px 23px 0 rgba(0,0,0,.12), 0 8px 10px -5px rgba(96,165,97,.2);
+
+$primary-shadow: 0 2px 2px 0 rgba(58,85,111,.14), 0 3px 1px -2px rgba(58,85,111,.2), 0 1px 5px 0 rgba(58,85,111,.12);
+$primary-shadow-hover: 0 14px 26px -12px rgba(58,85,111,.42), 0 4px 23px 0 rgba(0,0,0,.12), 0 8px 10px -5px rgba(58,85,111,.2);
+
+$default-shadow:0 2px 2px 0 rgba(169,169,169,.14), 0 3px 1px -2px rgba(169,169,169,.2), 0 1px 5px 0 rgba(169,169,169,.12);
+$default-shadow-hover:0 14px 26px -12px rgba(169,169,169,.42), 0 4px 23px 0 rgba(0,0,0,.12), 0 8px 10px -5px rgba(169,169,169,.2);
+
+/*Normal Color*/
+$white: #ffffff;
+$red: #fb3a3a;
+$yellow: #a0aec4;
+$purple: #7460ee;
+$blue: #02bec9;
+$megna: #00897b;
+
+/*Extra Variable*/
+$rgt: right;
+$lft: left;
+$border: rgba(120, 130, 140, 0.13);
+$table-border:#f3f1f1;
+$card-brd:#d7dfe3;
+$dark-text: #848a96;
+$radius: 4px;
+$form-brd: #b1b8bb;
+/*Preloader*/
+.preloader{
+    width: 100%;
+    height: 100%;
+    top:0px;
+    position: fixed;
+    z-index: 99999;
+    background: #fff;
+    .cssload-speeding-wheel{
+        position: absolute;
+        top: calc(50% - 3.5px);
+        left: calc(50% - 3.5px);
+    }
+}
+
